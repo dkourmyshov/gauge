@@ -1,0 +1,22 @@
+.arrow {
+  fill: deepskyblue;
+}
+.gauge {
+  stroke: dimgray;
+  fill: none;
+  stroke-width: 5;
+}
+.rain {
+  stroke: cadetblue;
+}
+.dry {
+  stroke: darkkhaki;
+}
+.marker {
+  stroke: dimgray;
+  stroke-width: 2;
+}
+.label {
+  stroke: dimgray;
+  font-family: verdana;
+}
