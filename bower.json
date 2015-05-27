@@ -6,7 +6,7 @@
   "authors": [
     "Dmitry Kourmyshov <dmitry.kourmyshov@gmail.com>"
   ],
-  "ignore: [
+  "ignore": [
     "gauge.html",
     "gauge.css",
     "gauge.js"
