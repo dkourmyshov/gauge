@@ -1,0 +1,25 @@
+{
+  "name": "gauge",
+  "main": "gauge.js",
+  "version": "0.0.0",
+  "homepage": "https://github.com/dkourmyshov/gauge",
+  "authors": [
+    "Dmitry Kourmyshov <dmitry.kourmyshov@gmail.com>"
+  ],
+  "description": "Simple JS component to display a gauge meter",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "ui",
+    "visualization"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
