@@ -43,7 +43,7 @@ function Gauge(properties) {
 Gauge.prototype = {
   // public
   setValue: function (value) {
-    this.arrow.setAttribute('transform', 'rotate(' + this.rescale(value) / Math.PI * 180 + ' ' + this.center.join(' ') +')');
+    this.needle.setAttribute('transform', 'rotate(' + this.rescale(value) / Math.PI * 180 + ' ' + this.center.join(' ') +')');
   },
   // private
   polarToRectangular: function(center, r, a) {
@@ -127,8 +127,8 @@ Gauge.prototype = {
       }).innerHTML = label;
     }
 
-    this.arrow = this.svgElement.appendShape('polygon', {
-      class: "arrow",
+    this.needle = this.svgElement.appendShape('polygon', {
+      class: "needle",
       points: "" + (this.center[0]) + " " +
                    (this.center[1] - this.radius * 0.025) + " " +
                    (this.center[0]) + " " +
@@ -136,6 +136,11 @@ Gauge.prototype = {
                    (this.center[0] + this.radius * 1.05) + " " +
                    (this.center[1])
     });
-
+    this.svgElement.appendShape('circle', {
+      cx: this.center[0],
+      cy: this.center[1],
+      r: this.radius * 0.05,
+      class: "needle"
+    });
   }
 };

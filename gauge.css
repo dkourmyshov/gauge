@@ -1,4 +1,4 @@
-.arrow {
+#barometer .needle {
   fill: deepskyblue;
 }
 .gauge {
@@ -19,4 +19,11 @@
 .label {
   stroke: dimgray;
   font-family: verdana;
+}
+.danger {
+  stroke: red;
+  stroke-width: 10;
+}
+#industrial .needle {
+  fill: dimgray;
 }
