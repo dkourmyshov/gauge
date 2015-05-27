@@ -12,7 +12,7 @@ SVGElement.prototype = {
   appendShape: function (shape, properties) {
     properties = properties || {};
     var element = document.createElementNS(this.NS, shape);
-    for (property in properties) if (properties.hasOwnProperty(property)) {
+    for (var property in properties) if (properties.hasOwnProperty(property)) {
       element.setAttribute(property, properties[property]);
     }
     this.element.appendChild(element);
@@ -21,7 +21,6 @@ SVGElement.prototype = {
 };
 
 function Gauge(properties) {
-  var i;
   properties = properties || {};
   this.height = properties.height || 400;
   this.width = properties.width || 600;
@@ -32,7 +31,7 @@ function Gauge(properties) {
       this.height - properties.vOffset];
   this.aperture = (properties.aperture || 210) * Math.PI / 180;
   this.radius = properties.radius || this.width * 0.3;
-  this.appendTo = properties.appendTo || document.getElementsByTagName("body")[0];;
+  this.appendTo = properties.appendTo || document.getElementsByTagName("body")[0];
   this.segments = properties.segments || [{start: this.start, end: this.end}];
   this.markers = properties.markers || [this.start, this.end];
   this.scaleStyle = properties.scaleStyle || 'outside';
@@ -51,17 +50,17 @@ Gauge.prototype = {
     return [
       Math.round(center[0] + r * Math.cos(a)),
       Math.round(center[1] + r * Math.sin(a))
-    ]
+    ];
   },
-  appendArc: function (svgElement, properties) {
+  appendArc: function (properties) {
     var start = this.polarToRectangular(properties.center, properties.r, properties.start);
     var end = this.polarToRectangular(properties.center, properties.r, properties.end);
-    largeArcFlag = properties.end - properties.start > Math.PI ? '1' : '0'; 
+    var largeArcFlag = properties.end - properties.start > Math.PI ? '1' : '0'; 
     var path = 'M' + start.join(',') +
          ' A' + properties.r + ',' + properties.r +
          ' 0 ' + largeArcFlag + ',1 ' + 
          end.join(',');
-    svgElement.appendShape('path', {
+    this.svgElement.appendShape('path', {
       d: path,
       class: properties.class
     });
@@ -71,6 +70,7 @@ Gauge.prototype = {
     return ((number - this.start) / (this.end - this.start) - 0.5) * this.aperture + Math.PI * 1.5;
   },
   render: function () {
+    var i;
     this.svgElement = new SVGElement({
       appendTo: this.appendTo,
       width: '' + this.width + 'px',
@@ -78,7 +78,7 @@ Gauge.prototype = {
     });
 
     for (i = 0; i < this.segments.length; i++) {
-      this.appendArc(this.svgElement, {
+      this.appendArc({
         center: this.center,
         start: this.rescale(this.segments[i].start),
         end: this.rescale(this.segments[i].end),
@@ -88,7 +88,7 @@ Gauge.prototype = {
     }
 
     for (i = 0; i < this.markers.length; i++) {
-      var value, label;
+      var value, label, tick;
       if (typeof this.markers[i] === 'number') {
         value = label = this.markers[i];
         tick = true;
